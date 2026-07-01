@@ -1,5 +1,7 @@
 import requests
 
+URL = "https://jsonplaceholder.typicode.com/users"
+
 def test_get_users_status_code():
     response = requests.get("https://jsonplaceholder.typicode.com/users") # отправляем гетзапрос на сервер
     
@@ -80,3 +82,66 @@ def test_first_user_id_is_int():
 
 
 #с циклами
+
+def test_email_all_users():
+    response = requests.get(URL)
+    body = response.json()
+
+    for user in body:
+        assert "email" in user  #для каждого пользователя из списка body проверь что у него есть ключ email
+
+def test_all_users_have_name():
+    response = requests.get(URL)
+    body = response.json()
+
+    for user in body: #пройтись по каждому пользователбю из списка(возьми каждого пользователя из боди)
+        assert "name" in user
+
+def test_all_users_have_id():
+    response = requests.get(URL, timeout=5)
+    body = response.json()
+
+    for user in body:
+        assert "id" in user
+
+def test_all_email_is_string():
+    response = requests.get(URL, timeout=5)
+    body = response.json()
+
+    for user in body:
+        assert "email" in user #проверить что ключ эмйла есть вообще
+        assert isinstance(user["email"], str)
+        
+def test_all_email_is_contains_at():
+    response = requests.get(URL, timeout=5)
+    body = response.json()
+
+    for user in body:
+        assert "email" in user
+        assert "@" in user["email"]
+
+def test_all_users_id_is_int():
+    response = requests.get(URL, timeout=5)
+    body = response.json()
+
+    for user in body:
+        assert "id" in user
+        assert isinstance(user["id"], int)
+
+def test_all_users_have_username():
+    response = requests.get(URL, timeout=5)
+    assert response.status_code == 200
+
+    body = response.json()
+
+    for user in body:
+        assert "username" in user
+
+def test_all_users_have_phone():
+    response = requests.get(URL, timeout=5)
+    assert response.status_code == 200
+
+    body = response.json()
+
+    for user in body:
+        assert "phone" in user
