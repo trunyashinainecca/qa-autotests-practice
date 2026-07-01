@@ -145,3 +145,19 @@ def test_all_users_have_phone():
 
     for user in body:
         assert "phone" in user
+        assert isinstance(user["phone"], str)
+    
+def test_all_users_have_website():
+    response = requests.get(URL, timeout=5)
+    assert response.status_code == 200
+
+    body = response.json()
+
+    for user in body:
+        assert "website" in user
+        assert isinstance(user["website"], str)
+
+#вложенные объекты
+
+
+#111111111111111111111111111111111111111111
