@@ -1,4 +1,11 @@
+import pytest
 import requests
+
+@pytest.fixture #нужно чтобы вынести общий код в одно место #специальная функция подготовкиа
+def users(): # назывние фикстуры.Потом ее будем исполтьзовать users прямо в текте
+    response = requests.get(URL, timeout=5)
+    assert response.status_code == 200
+    return response.json() # фикстур возращает список пользователей
 
 URL = "https://jsonplaceholder.typicode.com/users"
 
@@ -157,15 +164,56 @@ def test_all_users_have_website():
         assert "website" in user
         assert isinstance(user["website"], str)
 
-#вложенные объекты
+def test_all_users_have_address_city():
+    response = requests.get(URL, timeout=5)
+    assert response.status_code == 200
+
+    body = response.json()
+
+    for user in body:
+        assert "address" in user
+        assert "city" in user["address"]
+        assert isinstance(user["address"]["city"], str) # внутри адреса есть город
+
+def test_all_users_have_address_street(users):
+    for user in users:
+        assert "address" in user
+        assert "street" in user["address"]
+        assert isinstance(user["address"]["street"], str)
 
 
-#111111111111111111111111111111111111111111
+def test_all_users_have_address_geo_lat(users):
+    for user in users:
+        assert "address" in user
+        assert "geo" in user["address"]
+        assert "lat" in user["address"]["geo"]
+        assert isinstance(user["address"]["geo"]["lat"], str)
 
 
+def test_all_users_have_address_geo_lng(users):
+    for user in users:
+        assert "address" in user
+        assert "geo" in user["address"]
+        assert "lng" in user["address"]["geo"]
+        assert isinstance(user["address"]["geo"]["lng"], str)
+
+def test_all_users_have_company_name(users):
+    for user in users:
+        assert "company" in user
+        assert "name" in user["company"]
+        assert isinstance(user["company"]["name"], str)
 
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def test_all_users_have_company_catch_phrase(users):
+    for user in users:
+        assert "company" in user
+        assert "catchPhrase" in user["company"]
+        assert isinstance(user["company"]["catchPhrase"], str)
 
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def test_all_users_have_company_bs(users):
+    for user in users:
+        assert "company" in user
+        assert "bs" in user["company"]
+        assert isinstance(user["company"]["bs"], str)
+
