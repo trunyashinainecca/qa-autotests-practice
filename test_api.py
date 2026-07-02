@@ -1,7 +1,25 @@
-import requests
+import pytest
 
-
-URL = "https://jsonplaceholder.typicode.com/users"
+# parametrize запускает один и тот же тест несколько раз,
+# каждый раз подставляя новое значение в переменную field
+@pytest.mark.parametrize("field", ["name", "email", "phone", "website"])
+def test_all_users_have_field(users, field):
+    for user in users:
+        assert field in user
+# parametrize может передавать сразу два значения:
+# field — название поля, expected_type — ожидаемый тип данных
+@pytest.mark.parametrize1("field", "excepted_type",
+    [
+    ("name", str),
+    ("email", str), 
+    ("phone",str), 
+    ("website", str),
+    ("id", int)
+        ]
+    )
+def test_all_users_have_field_has_correct_type(users, field, excepted_type):
+    for user in users:
+        assert isinstance(user[field], excepted_type) #проверь, что значение поля имеет нужный тип
 
 def test_get_users_response_is_list(users):
     assert isinstance(users, list) #в данном случае сервер возращает список пользователей поэтому проверяем что body - это список
@@ -35,7 +53,7 @@ def test_first_user_name_is_string(users):
     assert isinstance(first_user["name"], str)
 
 def test_first_user_has_id(users):
-    first_user = body[0]
+    first_user = users[0]
 
     assert "id" in first_user
 
