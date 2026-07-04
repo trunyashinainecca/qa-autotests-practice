@@ -1,7 +1,9 @@
 import pytest
 
+
 # parametrize запускает один и тот же тест несколько раз,
 # каждый раз подставляя новое значение в переменную field
+# field приходит из parametrize
 @pytest.mark.parametrize("field", ["name", "email", "phone", "website"])
 def test_all_users_have_field(users, field):
     for user in users:
@@ -9,6 +11,7 @@ def test_all_users_have_field(users, field):
 
 # parametrize может передавать сразу два значения:
 # field — название поля, expected_type — ожидаемый тип данных
+# field и expected_type приходят из parametriz
 @pytest.mark.parametrize(
     "field, expected_type",
     [
@@ -16,13 +19,48 @@ def test_all_users_have_field(users, field):
         ("email", str),
         ("phone", str),
         ("website", str),
-        ("id", int),
+        ("id", int)
     ]
 )
 def test_all_users_field_has_correct_type(users, field, expected_type):
     for user in users:
         assert field in user
         assert isinstance(user[field], expected_type)
+
+
+# Параметризуем company: проверяем, что внутри company есть нужные поля
+@pytest.mark.parametrize("field", ["bs", "catchPhrase", "name"])
+def test_all_users_company1_has_field(users, field):
+    for user in users:
+        assert "company" in user
+        assert field in user["company"]
+
+
+# Проверяем, что поля внутри company являются строками
+@pytest.mark.parametrize("field", ["bs", "catchPhrase", "name"])
+def test_all_users_company_field_is_string(users, field):
+    for user in users:
+        assert "company" in user
+        assert field in user["company"]
+        assert isinstance(user["company"][field], str)
+
+#1. @pytest.mark.parametrize всегда должен стоять прямо над тем тестом, к которому относится.
+
+#2. Если в тесте есть field, он должен приходить из parametrize.
+
+#3. Если в тесте есть users, он приходит из fixture.
+
+#4. "field" и field — это разные вещи.
+   #"field" — просто текст.
+   #field — переменная.
+
+@pytest.mark.parametrize("field",["city","street"])
+def test_ll_address_has_field_is_string(users, field):
+    for user in users:
+        assert "address" in user
+        assert field in user["address"]
+        assert isinstance(user["address"][field], str)
+
 
 def test_get_users_response_is_list(users):
     assert isinstance(users, list) #в данном случае сервер возращает список пользователей поэтому проверяем что body - это список
@@ -64,8 +102,6 @@ def test_first_user_id_is_int(users):
     first_user = users[0]
 
     assert isinstance(first_user["id"], int)
-
-
 
 #с циклами
 
