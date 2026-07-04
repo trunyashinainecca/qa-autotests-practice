@@ -6,20 +6,23 @@ import pytest
 def test_all_users_have_field(users, field):
     for user in users:
         assert field in user
+
 # parametrize может передавать сразу два значения:
 # field — название поля, expected_type — ожидаемый тип данных
-@pytest.mark.parametrize1("field", "excepted_type",
+@pytest.mark.parametrize(
+    "field, expected_type",
     [
-    ("name", str),
-    ("email", str), 
-    ("phone",str), 
-    ("website", str),
-    ("id", int)
-        ]
-    )
-def test_all_users_have_field_has_correct_type(users, field, excepted_type):
+        ("name", str),
+        ("email", str),
+        ("phone", str),
+        ("website", str),
+        ("id", int),
+    ]
+)
+def test_all_users_field_has_correct_type(users, field, expected_type):
     for user in users:
-        assert isinstance(user[field], excepted_type) #проверь, что значение поля имеет нужный тип
+        assert field in user
+        assert isinstance(user[field], expected_type)
 
 def test_get_users_response_is_list(users):
     assert isinstance(users, list) #в данном случае сервер возращает список пользователей поэтому проверяем что body - это список
