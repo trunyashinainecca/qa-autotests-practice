@@ -55,3 +55,24 @@ def test_all_text_field_is_not_empty(field, comments):
     for comment in comments:
         assert field in comment
         assert comment[field] != ""
+def test_get_single_comment():
+    response= requests.get(f"{URL}/1",timeout=5)
+
+    assert response.status_code == 200
+
+    comment = response.json()
+
+    assert isinstance(comment,dict)
+    assert comment["id"] == 1
+
+    assert "postId" in comment
+    assert "name" in comment
+    assert "body" in comment
+    assert "email" in comment
+
+    assert "@" in comment["email"]
+
+    assert isinstance(comment["postId"], int)
+    assert isinstance(comment["name"], str)
+    assert isinstance(comment["body"], str)
+    assert isinstance(comment["email"], str)

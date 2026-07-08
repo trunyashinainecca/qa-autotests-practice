@@ -52,3 +52,22 @@ def test_all_posts_have_userid_id_positive(posts, field):
     for post in posts:
         assert field in post
         assert post[field] > 0
+
+def test_get_single_post_by_id():
+    response = requests.get(f"{URL}/1", timeout=5)
+
+    assert response.status_code == 200
+
+    post = response.json()
+
+    assert "userId" in post
+    assert "title" in post
+    assert "body" in post
+
+    assert isinstance(post, dict)
+    assert post["id"] == 1
+
+    assert isinstance(post["userId"], int)
+    assert isinstance(post["title"], str)
+    assert isinstance(post["body"], str)
+    
