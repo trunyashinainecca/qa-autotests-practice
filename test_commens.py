@@ -76,3 +76,12 @@ def test_get_single_comment():
     assert isinstance(comment["name"], str)
     assert isinstance(comment["body"], str)
     assert isinstance(comment["email"], str)
+
+def test_get_non_existing_comment_404():
+    response = requests.get(f"{URL}/99999",timeout=5)
+
+    assert response.status_code == 404
+
+    body = response.json()
+
+    assert body == {}

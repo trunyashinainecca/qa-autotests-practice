@@ -71,3 +71,22 @@ def test_get_single_post_by_id():
     assert isinstance(post["title"], str)
     assert isinstance(post["body"], str)
     
+
+    
+@pytest.mark.parametrize("field",["id","userId"])
+def test_all_posts_have_userid_id_positive(posts, field):
+    for post in posts:
+        assert field in post
+        assert post[field] > 0
+
+def test_get_non_existing_post_returns_404():
+    response = requests.get(f"{URL}/999999", timeout=5)
+
+    assert response.status_code == 404
+
+    body= response.json()
+
+    assert body == {}
+
+
+    
