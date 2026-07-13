@@ -16,11 +16,7 @@ def test_practice():
 
 def test_books_list():
     books = [
-    {"title":"love test","author":{
-        "name":"Anna",
-        "age":30
-        }
-    },
+    {"title":"dont love test","pages":25},
     {"title":"dont love test","pages":25},
     {"title":"good book test","pages":20}
     ]
@@ -126,3 +122,71 @@ def test_books_wich_genres():
 #book = {}           # словарь
 #"title"             # строка
 #30                  # число
+
+def test_if_practic():
+    user = {
+    "name":"Inessa",
+    "age":19
+    }
+    assert "name" in user
+    assert isinstance(user["name"],str)
+    assert "age" in user
+    assert isinstance(user["age"],int)
+    if user["age"] >= 18:
+        assert len(user["name"]) > 0
+    else:
+        assert user["age"] > 0
+
+        
+def test_if_practic_two():
+    products = [
+    {"name": "phone", "price": 700},
+    {"name": "book", "price": 300},
+    {"name": "pen", "price": 50}
+]
+    for product in products:
+        assert "name" in product
+        assert isinstance(product["name"],str)
+        assert "price" in product
+        assert isinstance(product["price"],int)
+        if  product["price"] > 500:
+            assert len(product["name"]) > 0
+        else:
+            assert product["price"] > 0
+
+def test_ifelse_practic_two():
+    products = [
+    {"name": "phone", "price": 700},
+    {"name": "book", "price": 300},
+    {"name": "pen", "price": 50}
+]
+    for product in products:
+        assert "name" in product
+        assert isinstance(product["name"],str)
+        assert "price" in product
+        assert isinstance(product["price"],int)
+        if  product["price"] > 500:
+            assert len(product["name"]) > 0
+        elif product["price"] > 100:
+            assert  product["price"] < 500
+        else:
+            assert product["price"] > 0
+
+
+def test_ifelse2_practic_two():
+    products = [
+    {"name": "phone", "price": 700},
+    {"name": "book", "price": 300},
+    {"name": "pen", "price": 50}
+]
+    for product in products:
+        assert "name" in product
+        assert isinstance(product["name"],str)
+        assert "price" in product
+        assert isinstance(product["price"],int)
+        if  product["price"] > 500:
+            assert len(product["name"]) > 0
+        elif product["price"] > 200:
+            assert  product["price"] < 900
+        else:
+            assert product["price"] > 0
