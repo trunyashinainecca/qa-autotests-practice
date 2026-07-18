@@ -190,3 +190,56 @@ def test_ifelse2_practic_two():
             assert  product["price"] < 900
         else:
             assert product["price"] > 0
+
+def test_user_age():
+    user={
+          "name":"inessa",
+          "age":20
+          }
+    assert "name" in user
+    assert isinstance(user["name"],str)
+    assert len(user["name"]) > 0
+    
+    assert "age" in user
+    assert isinstance(user["age"], int)
+    assert user["age"] > 0
+
+def check_name(name):
+    assert isinstance(name, str)
+    assert len(name) > 0
+
+
+def check_product(name, price):
+    assert isinstance(name, str)
+    assert len(name) > 0
+
+    assert isinstance(price, int)
+    assert price > 0
+
+products = [
+    {"name": "phone", "price": 700},
+    {"name": "book", "price": 300},
+    {"name": "pen", "price": 50}
+]
+for product in products:
+ check_product(product["name"], product["price"])
+    
+check_product("phone", 700)
+check_product("book", 300)
+
+
+def check_name(name):
+    assert isinstance(name, str)
+    assert len(name) > 0
+users = [
+    {"name": "Inessa"},
+    {"name": "Ivan"},
+    {"name": "Masha"}
+]
+for user in users:
+    assert "name" in user
+    check_name(user["name"])
+
+
+
+
