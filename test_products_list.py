@@ -240,6 +240,80 @@ for user in users:
     assert "name" in user
     check_name(user["name"])
 
+def is_even(number):
+ if  number% 2 == 0:
+    return True
+ else:
+    return False
+ 
+print(is_even(4))
+print(is_even(7))
 
+def is_adult(age):
+ if age >= 18 :
+    return True
+ else:
+    return False
+ 
+def check_temperature(temperature):
+    if temperature <= 10:
+        print("cold")
+    elif  temperature <= 24:
+        print("warm")
+    else:
+        print("hot")
 
+def check_score(score):
+    if score < 50:
+        return "bad"
+    elif score <= 79:
+        return "good"
+    else:
+        return"excellent" 
+        
+def is_password_length(password):
+ if len(password) < 8 :
+    return "short"
+ else:
+    return "ok"
 
+def is_password_length(password):
+ if len(password) < 8 :
+    return "short"
+ elif not any(char.isdigit() for char in password): #если в пароле нет ни одной цифры
+    return "weak"
+ else:
+    return "ok"
+ 
+ def check_balance(balance):
+     if balance < 0:
+         return "negative"
+     elif balance == 0:
+         return "zero"
+     else:
+         return "positive"
+    
+def check_age(age):
+     if age < 14:
+         return "child"
+     elif age <= 17:
+         return "teen"
+     else:
+         return "adult"
+     
+    
+def check_price(price):
+     if price < 100:
+         return "cheap"
+     elif price <= 500:
+         return "normal"
+     else:
+         return "expensive"
+     
+def check_login(login):
+     if len(login) == 0:
+         return "empty"
+     elif len(login) < 5:
+         return "short"
+     else:
+         return "ok"
