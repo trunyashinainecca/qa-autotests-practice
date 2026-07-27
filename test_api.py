@@ -57,7 +57,7 @@ def test_all_users_company_field_is_string(users, field):
 @pytest.mark.parametrize("field",["city","street"])
 def test_all_address_has_field_is_string(users, field):
     for user in users:
-        assert "address" in user
+        assert "address" in user 
         assert field in user["address"]
         assert isinstance(user["address"][field], str)
 # Проверяем координаты пользователя.

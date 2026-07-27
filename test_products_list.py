@@ -317,3 +317,35 @@ def check_login(login):
          return "short"
      else:
          return "ok"
+     
+def check_age(age):
+    if age < 18:
+        return "child"
+    else:
+        return "adult"
+result = check_age(20)
+print(result)
+result = check_age(15)
+print(result)
+
+def check_price(price):
+    if price < 100:
+        return "cheap"
+    elif price <= 500:
+        return "normal"
+    else:
+        return "expensive"
+result = check_price(650)
+print(result)
+result = check_price(300)
+print(result)
+result = check_price(50)
+print(result)
+result = check_price(100)
+print(result)
+result = check_price(500)
+print(result)
+
+def check_name(name):
+    print(name[-1])
+check_name("Python")
