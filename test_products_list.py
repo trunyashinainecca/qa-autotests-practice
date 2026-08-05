@@ -349,3 +349,26 @@ print(result)
 def check_name(name):
     print(name[-1])
 check_name("Python")
+
+def check_scare(score):
+    if score < 50: 
+        return "fail" 
+    elif score <= 80: 
+        return "good" 
+    else: 
+        return"excellent" 
+
+def test_check_score():
+    assert check_scare(49) == "fail"
+    assert check_scare(50) == "good"
+    assert check_scare(80) == "good"
+    assert check_scare(81) == "excellent"
+
+scores = [49,50,80,81] 
+for score in scores:
+    print(check_scare(score))
+
+def check_price(price):
+    assert isinstance(price,int)
+    assert price > 0
+    return "valid"
