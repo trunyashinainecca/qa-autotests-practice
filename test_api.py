@@ -1,5 +1,33 @@
 import pytest
 
+def check_field(user, field, expected_type):
+    assert field in user
+    assert isinstance(user[field], expected_type)
+
+
+@pytest.mark.parametrize(
+    "field, expected_type",
+    [
+        ("name", str),
+        ("email", str),
+        ("phone", str),
+        ("website", str),
+    ]
+)
+def test_all_users_have_field(users, field, expected_type):
+    for user in users:
+        check_field(user, field, expected_type)
+
+
+
+
+
+
+
+
+
+
+
 
 # parametrize запускает один и тот же тест несколько раз,
 # каждый раз подставляя новое значение в переменную field
@@ -92,6 +120,22 @@ def test_all_email_is_contains_at(users):
 def test_all_users_have_username(users):
     for user in users:
         assert "username" in user 
+
+
+
+@pytest.mark.parametrize(
+    "field, expected_type",
+     [
+     ("name", str),
+     ("email", str), 
+     ("id", int)
+     ]
+    )
+def test_users_field_type(users, field, expected_type):
+    for user in users:
+        assert field in user
+        assert isinstance(user[field], expected_type)
+    
 
 
 
