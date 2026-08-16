@@ -75,3 +75,9 @@ def test_order_field_type(order, field, expected_type):
 
 #@pytest.fixture(scope="function") фикстура запускается занового для каждого теста
 #def user():
+
+#@pytest.fixture(scope="session") session  → один раз за весь запуск pytest
+
+#function → каждый тест
+#module   → каждый файл
+#session  → весь запуск pytest
