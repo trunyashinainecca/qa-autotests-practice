@@ -51,7 +51,7 @@ def test_product_field_type(product, field, expected_type):
     assert isinstance(product[field],expected_type)
 
 @pytest.fixture()
-def order():
+def order1():
     return {
     "id": 101,
     "total": 1500.5,
@@ -66,9 +66,9 @@ def order():
         ("paid", bool)
     ]
 )
-def test_order_field_type(order, field, expected_type):
-    assert field in order
-    assert isinstance(order[field],expected_type)
+def test_order_field_type1(order1, field, expected_type):
+    assert field in order1
+    assert isinstance(order1[field], expected_type)
 
 #@pytest.fixture(scope="module") означает создать фикстуру один раз для всего текстового файла 
 #def user():
@@ -81,3 +81,13 @@ def test_order_field_type(order, field, expected_type):
 #function → каждый тест
 #module   → каждый файл
 #session  → весь запуск pytest
+
+@pytest.fixture
+def order():
+    print("Cоздаем заказ")
+    yield {"id": 1, "status":"new"} # через что можно добавить значение в тест до это аогодготовка (setup)  в самом yield передает значение в тест после teardown- очистка после теста
+    print("Удаляем заказ")
+
+def test_order(order):
+    assert order["status"] == "paid"
+
