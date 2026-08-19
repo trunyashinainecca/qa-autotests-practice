@@ -91,3 +91,6 @@ def order():
 def test_order(order):
     assert order["status"] == "paid"
 
+#function = сколько тестов
+#module = сколько файлов
+#session = 1 на весь запуск
