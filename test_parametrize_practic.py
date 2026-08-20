@@ -26,8 +26,8 @@ def test_all_names_are_string(names):
     for name in names:
         assert isinstance(name, str)
 
-@pytest.fixture()
-def product(scope="module"):
+@pytest.fixture(scope="module")
+def product():
     print("product fixture")
     return {
     "name": "phone",
@@ -94,3 +94,51 @@ def test_order(order):
 #function = сколько тестов
 #module = сколько файлов
 #session = 1 на весь запуск
+
+@pytest.fixture(scope="module")
+def user1():
+    print("Создаем пользователя")
+    yield {"name":"Inessa","age":25}
+    print("Удаляем пользователя")
+
+def test_user_name(user1):
+    assert user1["name"] == "Inessa"
+    
+def test_user_age(user1):
+    assert isinstance(user1["age"], int)
+    assert user1["age"] > 0
+
+# фикстура мржет использовать другую фикстуру
+# @pytest.fixture()
+# def user_age(user):
+#     return user["age"]
+
+# def test_user_age(user_age):
+#     assert user_age == 25
+
+# @pytest.fixture
+# def product():
+#     return {"name": "phone", "price": 500}
+
+# @pytest.fixture()
+# def product_name(product):
+#     return product["name"]
+
+# def test_product_name(product_name):
+#     assert product_name == "phone"
+
+# @pytest.fixture
+# def product():
+#     return {"name": "phone", "price": 200}
+# @pytest.fixture
+# def product_price(product):
+#     return product["price"]
+# @pytest.fixture
+# def is_expensive(product_price):
+#     return product_price > 300
+
+# def test_is_expensive(is_expensive):
+#     assert is_expensive == True
+
+# def test_is_not_expendive(is_expensive):
+#      assert is_expensive == False
