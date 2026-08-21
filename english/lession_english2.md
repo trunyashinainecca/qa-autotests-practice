@@ -1,27 +1,28 @@
+# lesson 2
+
+check - проверить(просто проверить что то)
+verify - проверить/ убедиться(убедиться что что то соответсвует ожидаемому)
+pass - пройти успешно
+fail - завершиться с ошибкой/ провалиться
+invalid - некорректный/ нелостумый
+seccessful - успешный
+unseccessful - неуспешный
+
+match - совпадать \ соответовать
+does not match — не совпадает
+contain - содержать
+
+data - данные
+date- дата
 
 
-# technical english
+check the response
+verify the status code
+the test passed
+the test failed
+the value is vallid
+the value is invalid
 
-##lession 1
-
-request - запрос
-response - ответ
-send - отправлять
-receive - получать
-expected - ожидаемый
-actual - фактический
-returns - возращает
-different from - другой/отличающий от
-correct - правильный / корректный
-error - ошибка
-
-## exsemples
-
-
-
-send a request - отправлять запрос
-
-the server returns a response - сервер возращает ответ
-
-expected result - ожидаемый результат
-actual result - фактический результат
+the request was seccessful
+the actual result mastches the expected result
+the response contains an error
