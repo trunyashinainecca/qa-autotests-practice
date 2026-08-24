@@ -19,6 +19,11 @@ def test_pass():
 def test_skip():
     assert 1 == 2
 
-@pytest.mark.xfail(strict=True)
-def test1_bug(strict=True):
+@pytest.mark.xfail(strict=True)# неожиданны  спех - проблема
+def test1_bug():
     assert 5 == 5
+
+@pytest.mark.smoke #свои маркер и запускать так  pytest -m smoke
+def test_login():
+    assert True
+    
