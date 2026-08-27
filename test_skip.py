@@ -27,3 +27,15 @@ def test1_bug():
 def test_login():
     assert True
     
+@pytest.mark.smoke
+def test_example():
+    assert True
+
+@pytest.mark.regression
+def test_payment():
+    assert True
+
+@pytest.mark.smoke
+@pytest.mark.regression # pytest -m "smoke or regression" - любой из маркеров  and оба маркера
+def test_login():
+    assert True
