@@ -136,7 +136,62 @@ def test_users_field_type(users, field, expected_type):
         assert field in user
         assert isinstance(user[field], expected_type)
     
+def test_api_status():
+    status_code = 500
+    assert status_code == 200,"expected status 200"
+
+def test_name():
+    actual_name = "Ivan"
+    expected_name = "Inessa"
+    assert actual_name == expected_name, f"Expected {expected_name}, got {actual_name}"
+
+def test_api():
+    actual_name = 500
+    expected_name = 200
+    assert actual_name == expected_name, f"Expected {expected_name}, got {actual_name}"
+
+def test_user_list():
+    users = []
+    assert len(users) !=0, f"Expected non-empty list, got 0 users"
+
+def test_user_id():
+    user_id = "10"
+    assert isinstance(user_id,int), f"Expected int, got {type(user_id).__name__}"
+
+def test_price11():
+    price = 10.5
+    assert isinstance(price,float), f"Expected float, got {type(price).__name__}"
+
+def test_response_data_int():
+    response_data = {"id": 10, "name": "Inessa"}
+    assert isinstance(response_data["id"],int), f"Expected int, got {type(response_data['id']).__name__}"
+
+def test_response_data_name():
+    response_data = {"id": 10, "name": "Inessa"}
+    assert isinstance(response_data["name"],str), f"Expected str, got {type(response_data["name"]).__name__}"
+
+def test_response_data_active():
+    response_data = {"id": 10, "name": "Inessa","active":True}
+    assert isinstance(response_data["active"], bool), f"Expected bool, got {type(response_data["active"]).__name__}"
 
 
+def test_response_data_rating():
+    response_data = {"id": 10, "name": "Inessa","active":True, "rating":4.8}
+    assert isinstance(response_data["rating"], float), f"Expected float, got {type(response_data["rating"]).__name__}"
 
+def test_response_data_age():
+    response_data = {"id": 10, "name": "Inessa","active":True, "rating":4.8,"age":25}
+    assert isinstance(response_data["age"], int), f"Expected int, got {type(response_data["age"]).__name__}"
+    assert response_data["age"] > 0
 
+def test_response_data_rating_float():
+    response_data = {"id": 10, "name": "Inessa","active":True, "rating":4.8,"age":25}
+    assert isinstance(response_data["rating"], float), f"Expected float, got {type(response_data["rating"]).__name__}"
+    assert response_data["rating"] > 0
+    assert response_data["rating"] <= 5
+
+    assert isinstance(response_data["name"],str), f"Expected str, got {type(response_data["name"]).__name__}"
+    assert len(response_data["name"]) > 0
+
+    assert isinstance(response_data["id"], int), f"Expected int, got {type(response_data['id']).__name__}"
+    assert response_data["id"] > 0
