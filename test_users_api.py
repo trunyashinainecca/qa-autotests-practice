@@ -63,9 +63,11 @@ def test_get_user_by_username():
     assert len(users) > 0
     assert users[0]["username"] == "Bret"
 
-@pytest.mark.parametrize("username",["Bret", "Anton","Vasia"])
-def test_get_user_bay_username(username):
-    params = username
+@pytest.mark.parametrize("username",["Bret", "Antonette","Samantha"])
+def test_get_users_by_username(username):
+    params = {"username" :username}
     response = requests.get(f"https://jsonplaceholder.typicode.com/users",params=params, timeout=5)
     assert response.status_code == 200
-
+    users = response.json()
+    assert len(users) > 0
+    assert users[0]["username"] == username
