@@ -158,3 +158,28 @@ def test_delete_post():
      assert response.status_code == 200
      body = response.json()
      assert body == {}
+
+
+def test_create_post():
+    new_post = {
+        "title": "My first post",
+        "body": "API testing practice",
+        "userId": 1
+    }
+
+    response = requests.post(
+        "https://jsonplaceholder.typicode.com/posts",
+         json = new_post,
+         timeout=5
+         )
+    
+    assert response.status_code == 201
+
+    created_post = response.json()
+
+    assert isinstance(created_post, dict)
+    assert "id" in created_post
+    assert created_post["title"] == new_post["title"]
+    assert created_post["body"] == new_post["body"]
+    assert created_post["userId"] == new_post["userId"]
+

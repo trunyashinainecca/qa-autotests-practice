@@ -105,4 +105,21 @@ def test_get_posts_by_user_id():
 
     for post in posts:
         assert post["userId"] == 1
-    
+
+@pytest.mark.parametrize("user_id",[1, 3, 5])
+def test_get_posts_by_different_users(user_id):
+    params = {"userId": user_id}
+    response = requests.get(
+        "https://jsonplaceholder.typicode.com/posts",
+         params = params,
+         timeout= 5
+    )
+    assert response.status_code == 200
+
+    posts = response.json()
+
+    assert isinstance(posts, list)
+    assert len(posts) > 0
+
+    for post in posts:
+        assert post["userId"] == user_id
