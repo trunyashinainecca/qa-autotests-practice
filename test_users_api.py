@@ -71,3 +71,38 @@ def test_get_users_by_username(username):
     users = response.json()
     assert len(users) > 0
     assert users[0]["username"] == username
+
+def test_get_nonexistent_username():
+    params = {"username":"UnknownUser"}
+
+    response  = requests.get(
+        "https://jsonplaceholder.typicode.com/users", 
+        params=params, 
+        timeout=5
+    )
+    assert response.status_code == 200
+
+    users = response.json()
+
+    assert isinstance(users, list)
+    assert users == []
+
+def test_get_posts_by_user_id():
+    params = {"userId":1}
+
+    response  = requests.get(
+            "https://jsonplaceholder.typicode.com/posts", 
+            params=params, 
+            timeout=5
+        )
+
+    assert response.status_code == 200
+
+    posts = response.json()
+
+    assert isinstance(posts, list)
+    assert len(posts) > 0
+
+    for post in posts:
+        assert post["userId"] == 1
+    

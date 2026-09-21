@@ -16,3 +16,15 @@ def test_practice():
         assert isinstance(user["age"],int)
         assert user["age"] > 0
 
+
+def check_age(age):
+    assert age > 0
+    print("Возраст проверен")
+
+users = [
+    {"name":"inessa","age":17},
+    {"name":"ivan","age":25},
+    {"name":"Masha","age":20}
+    ]
+for user in users:
+    check_age(user["age"])
