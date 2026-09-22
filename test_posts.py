@@ -183,3 +183,117 @@ def test_create_post():
     assert created_post["body"] == new_post["body"]
     assert created_post["userId"] == new_post["userId"]
 
+def test_update_post():
+    updated_post = {
+        "id": 1,
+        "title": "Updated title",
+        "body": "Updated body",
+        "userId": 1
+    }
+
+    response = requests.put(
+        "https://jsonplaceholder.typicode.com/posts/1",
+        json=updated_post,
+        timeout=5
+    )
+
+    assert response.status_code == 200
+
+    result = response.json()
+
+    assert isinstance(result, dict)
+    assert result["id"] == updated_post["id"]
+    assert result["title"] == updated_post["title"]
+    assert result["body"] == updated_post["body"]
+    assert result["userId"] == updated_post["userId"]
+
+def test_update_only_post_title():
+    updated_data = {
+        "title": "Partially updated title"
+    }
+
+    response = requests.patch(
+        "https://jsonplaceholder.typicode.com/posts/1",
+        json=updated_data,
+        timeout=5
+    )
+
+    assert response.status_code == 200
+
+    result = response.json()
+
+    assert isinstance(result, dict)
+    assert result["id"] == 1
+    assert result["title"] == updated_data["title"]
+
+def test_delete_post():
+    response = requests.delete(
+        "https://jsonplaceholder.typicode.com/posts/1",
+        timeout=5
+    )
+
+    assert response.status_code == 200
+
+    result = response.json()
+
+    assert isinstance(result, dict)
+    assert result == {}
+    
+def test_update_only_post_body():
+
+    updated_data = {"body": "Updated post body"}
+    
+    
+    response = requests.patch(
+            "https://jsonplaceholder.typicode.com/posts/2",
+            json=updated_data,
+            timeout=5
+        )
+    
+    assert response.status_code == 200
+    
+    result = response.json()
+    
+    assert isinstance(result, dict)
+    assert result["id"] == 2
+    assert result["body"] == updated_data["body"]
+
+def test_create_postic():
+    new_post = {
+        "title": "My first post",
+        "body": "API testing practice",
+        "userId": 1
+    }
+
+    response = requests.post(
+        "https://jsonplaceholder.typicode.com/posts",
+         json = new_post,
+         timeout=5
+         )
+    
+    assert response.status_code == 201
+    assert "application/json" in response.headers["Content-Type"]
+
+    created_post = response.json()
+
+    assert isinstance(created_post, dict)
+    assert "id" in created_post
+    assert created_post["title"] == new_post["title"]
+    assert created_post["body"] == new_post["body"]
+    assert created_post["userId"] == new_post["userId"]
+
+
+def test_get_posts_with_headers():
+    request_headers = {
+        "Accept": "application/json"
+    }
+
+    response = requests.get(
+        "https://jsonplaceholder.typicode.com/posts",
+        headers=request_headers,
+        timeout=5
+    )
+
+    assert response.status_code == 200
+    assert response.request.headers["Accept"] == "application/json" #я хочу получить ответ в формате json или что мы запросили
+    assert "application/json" in response.headers["Content-Type"] #какой формат получили  или что мы получили
